@@ -6,19 +6,19 @@ using namespace std;
 void FillRand(int** Arr, const int m, const int n);
 void Print(int** Arr, const int m, const int n);
 
-int** Push_row_back(int** Arr, int& m, const int n);
-int** Push_row_front(int** Arr, int& m, const int n);
-int** Insert_row(int** Arr, int& m, const int n, int index);
-int** Pop_row_back(int** Arr, int& m, const int n);
-int** Pop_row_front(int** Arr, int& m, const int n);
-int** Erase_row(int** Arr, int& m, const int n, int index);
+void Push_row_back(int **& Arr, int& m, const int n);
+void Push_row_front(int **& Arr, int& m, const int n);
+void Insert_row(int **& Arr, int& m, const int n, int index);
+void Pop_row_back(int **& Arr, int& m, const int n);
+void Pop_row_front(int **& Arr, int& m, const int n);
+void Erase_row(int **& Arr, int& m, const int n, int index);
 
-int** Push_col_back(int** Arr, const int m, int& n);
-int** Push_col_front(int** Arr, const int m, int& n);
-int** Insert_col(int** Arr, const int m, int& n, int index);
-int** Pop_col_back(int** Arr, const int m, int& n);
-int** Pop_col_front(int** Arr, const int m, int& n);
-int** Erase_col(int** Arr, const int m, int& n, int index);
+void Push_col_back(int** Arr, const int m, int& n);
+void Push_col_front(int** Arr, const int m, int& n);
+void Insert_col(int** Arr, const int m, int& n, int index);
+void Pop_col_back(int** Arr, const int m, int& n);
+void Pop_col_front(int** Arr, const int m, int& n);
+void Erase_col(int** Arr, const int m, int& n, int index);
 
 void main()
 {
@@ -42,46 +42,46 @@ void main()
 	FillRand(Arr, m, n);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
-	Arr = Push_row_back(Arr, m, n);
+	Push_row_back(Arr, m, n);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
-	Arr = Push_row_front(Arr, m, n);
+	Push_row_front(Arr, m, n);
 	Print(Arr, m, n);
 
 	int index;
 	cout << delimiter << endl;
 	cout << "....? "; cin >> index;
-	Arr = Insert_row(Arr, m, n, index);
+	Insert_row(Arr, m, n, index);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
-	Arr = Pop_row_back(Arr, m, n);
+	Pop_row_back(Arr, m, n);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
-	Arr = Pop_row_front(Arr, m, n);
+	Pop_row_front(Arr, m, n);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
 	cout << "Введите индекс удаляемой строки: "; cin >> index;
-	Arr = Erase_row(Arr, m, n, index);
+	Erase_row(Arr, m, n, index);
 	Print(Arr, m, n);
 
 	cout << delimiter << endl;
-	Arr = Push_col_back(Arr, m, n);
+	Push_col_back(Arr, m, n);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
-	Arr = Push_col_front(Arr, m, n);
+	Push_col_front(Arr, m, n);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
 	cout << "....? "; cin >> index;
-	Arr = Insert_col(Arr, m, n, index);
+	Insert_col(Arr, m, n, index);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
-	Arr = Pop_col_back(Arr, m, n);
+	Pop_col_back(Arr, m, n);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
-	Arr = Pop_col_front(Arr, m, n);
+	Pop_col_front(Arr, m, n);
 	Print(Arr, m, n);
 	cout << delimiter << endl;
-	Arr = Erase_col(Arr, m, n, index);
+	Erase_col(Arr, m, n, index);
 	Print(Arr, m, n);
 	//		Удаление ДДМ:
 	//1) Удаляем строки:
@@ -116,7 +116,7 @@ void Print(int** Arr, const int m, const int n)
 	}
 }
 
-int** Push_row_back(int** Arr, int& m, const int n)
+void Push_row_back(int **& Arr, int& m, const int n)
 {
 	int** Buffer = new int*[m + 1];
 
@@ -124,14 +124,13 @@ int** Push_row_back(int** Arr, int& m, const int n)
 	{
 		Buffer[i] = Arr[i];
 	}
-	delete[] Arr;
+	delete[]Arr;
 	Arr = Buffer;
 	Arr[m] = new int[n + 1]{};
 	m++;
-	return Arr;
 }
 
-int** Push_row_front(int** Arr, int& m, const int n)
+void Push_row_front(int **& Arr, int& m, const int n)
 {
 	int** Buffer = new int*[m + 1];
 
@@ -139,14 +138,12 @@ int** Push_row_front(int** Arr, int& m, const int n)
 	{
 		Buffer[i + 1] = Arr[i];
 	}
-	delete[] Arr;
+	delete[]Arr;
 	Arr = Buffer;
 	Arr[0] = new int[n] {};
 	m++;
-	return Arr;
 }
-
-int** Insert_row(int** Arr, int& m, const int n, int index)
+void Insert_row(int **& Arr, int& m, const int n, int index)
 {
 	int** Buffer = new int*[m + 1];
 
@@ -158,26 +155,24 @@ int** Insert_row(int** Arr, int& m, const int n, int index)
 	{
 		Buffer[i + 1] = Arr[i];
 	}
-	delete[] Arr;
+	delete[]Arr;
 	Arr = Buffer;
 	Arr[index] = new int[n] {};
 	m++;
-	return Arr;
 }
 
-int** Pop_row_back(int** Arr, int& m, const int n)
+void Pop_row_back(int **& Arr, int& m, const int n)
 {
 	int** Buffer = new int*[--m];
 	for (int i = 0; i < m; i++)
 	{
 		Buffer[i] = Arr[i];
 	}
-	delete[] Arr;
+	delete[]Arr;
 	Arr = Buffer;
-	return Arr;
 }
 
-int** Pop_row_front(int** Arr, int& m, const int n)
+void Pop_row_front(int **& Arr, int& m, const int n)
 {
 	int** Buffer = new int*[--m];
 
@@ -185,12 +180,11 @@ int** Pop_row_front(int** Arr, int& m, const int n)
 	{
 		Buffer[i] = Arr[i + 1];
 	}
-	delete[] Arr;
+	delete[]Arr;
 	Arr = Buffer;
-	return Arr;
 }
 
-int** Erase_row(int** Arr, int& m, const int n, int index)
+void Erase_row(int **& Arr, int& m, const int n, int index)
 {
 	int** Buffer = new int*[--m];
 	for (int i = 0; i < index; i++)
@@ -201,12 +195,11 @@ int** Erase_row(int** Arr, int& m, const int n, int index)
 	{
 		Buffer[i] = Arr[i + 1];
 	}
-	delete[] Arr;
+	delete[]Arr;
 	Arr = Buffer;
-	return Arr;
 }
 
-int** Push_col_back(int** Arr, const int m, int& n)
+void Push_col_back(int** Arr, const int m, int& n)
 {
 	for (int i = 0; i < m; i++)
 	{
@@ -219,10 +212,10 @@ int** Push_col_back(int** Arr, const int m, int& n)
 		Arr[i] = Buffer;
 	}
 	n++;
-	return Arr;
+	//return Arr;
 }
 
-int** Push_col_front(int** Arr, const int m, int& n)
+void Push_col_front(int** Arr, const int m, int& n)
 {
 	for (int i = 0; i < m; i++)
 	{
@@ -235,9 +228,9 @@ int** Push_col_front(int** Arr, const int m, int& n)
 		Arr[i] = Buffer;
 	}
 	n++;
-	return Arr;
+	//return Arr;
 }
-int** Insert_col(int** Arr, const int m, int& n, int index)
+void Insert_col(int** Arr, const int m, int& n, int index)
 {
 	for (int i = 0; i < m; i++)
 	{
@@ -254,9 +247,9 @@ int** Insert_col(int** Arr, const int m, int& n, int index)
 		Arr[i] = Buffer;
 	}
 	n++;
-	return Arr;
+	//return Arr;
 }
-int** Pop_col_back(int** Arr, const int m, int& n)
+void Pop_col_back(int** Arr, const int m, int& n)
 {
 	for (int i = 0; i < m; i++)
 	{
@@ -269,9 +262,8 @@ int** Pop_col_back(int** Arr, const int m, int& n)
 		Arr[i] = Buffer;
 	}
 	n--;
-	return Arr;
 }
-int** Pop_col_front(int** Arr, const int m, int& n)
+void Pop_col_front(int** Arr, const int m, int& n)
 {
 	for (int i = 0; i < m; i++)
 	{
@@ -284,9 +276,9 @@ int** Pop_col_front(int** Arr, const int m, int& n)
 		Arr[i] = Buffer;
 	}
 	n--;
-	return Arr;
+
 }
-int** Erase_col(int** Arr, const int m, int& n, int index)
+void Erase_col(int** Arr, const int m, int& n, int index)
 {
 	for (int i = 0; i < m; i++)
 	{
@@ -301,5 +293,4 @@ int** Erase_col(int** Arr, const int m, int& n, int index)
 		}
 	}
 	n--;
-	return Arr;
 }
